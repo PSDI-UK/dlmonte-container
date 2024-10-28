@@ -6,6 +6,10 @@ The `Dockerfile` here builds a container image housing the latest
 development snapshot of DL_MONTE. The image is intended to be used
 as a container-image analogue of the DL_MONTE executable.
 
+See the [DL_MONTE manual](https://dl_monte.gitlab.io/dl_monte_manual/)
+and [here](https://gitlab.com/dl_monte/user-hub) for further information
+about the program.
+
 ## Obtaining an image
 
 Images can be found in  the 'Packages' section of this GitHub project.
@@ -42,9 +46,17 @@ directory.
 
 ## Notes for developers
 - Some example DL_MONTE input files are provided in the directory
-  `dlmonte_example_input`. Invoking DL_MONTE using the container
+  `dlmonte_example_input`. (Note that DL_MONTE expects a minimum of
+  3 files: `CONTROL`,`CONFIG`, and `FIELD`. Such files are provided therein).
+  Invoking DL_MONTE using the container
   image as described above in the same directory as these files
   should result in the creation of a number of files ending in
   `.000`. Moreover, the `OUTPUT.000` file, which contains a log
   created by DL_MONTE during execution, should conclude with 'normal
   exit'.
+- The file `psdi-tool-store-metadata.json` houses metadata for the
+  container image which is used by the
+  [PSDI Tool Store](https://psdi-uk.github.io/psdi-tool-store/). Ideally the
+  information in this file would be updated as part of a CI/CD pipeline,
+  but for now its contents are 'static'. **This is something to do
+  in the future.**
