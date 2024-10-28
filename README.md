@@ -12,7 +12,7 @@ Images can be found in  the 'Packages' section of this GitHub project.
 Commands are provided there to pull a specific version to your local
 instance of docker, e.g.
 ```
-docker pull ghcr.io/psdi-uk/dlmonte-container/dlmonte:v0.0.1`
+docker pull ghcr.io/psdi-uk/dlmonte-container/dlmonte:v0.0.1
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ It is intended that the image be used similarly to the
 DL_MONTE binary executable in order to run DL_MONTE simulations. An
 example command is:
 ```
-docker run -v ${PWD}:/data dlmonte:v0.0.1`
+docker run -v ${PWD}:/data dlmonte:v0.0.1
 ```
 This command assumes that the image is named 'dlmonte:v0.0.1' and that the
 current directory contains the DL_MONTE input files for the desired
