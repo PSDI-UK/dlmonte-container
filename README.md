@@ -17,8 +17,9 @@ docker pull ghcr.io/psdi-uk/dlmonte-container/dlmonte:v0.0.1`
 
 ## Usage
 
-The intendend use of this image is to run DL_MONTE simulations
-via commands such as:
+It is intended that the image be used similarly to the
+DL_MONTE binary executable in order to run DL_MONTE simulations. An
+example command is:
 ```
 docker run -v ${PWD}:/data dlmonte:v0.0.1`
 ```
