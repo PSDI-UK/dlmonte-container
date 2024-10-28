@@ -1,0 +1,66 @@
+[
+  {
+    "@id": null,
+    "@type": "dcatExt:Tool",
+    "dcat:resource": {
+      "@id": null
+    },
+    "dcterms:title": "DL_MONTE container image",
+    "rdfs:label": "DL_MONTE container image",
+    "dcterms:description":"A container image for the Monte Carlo molecular simulation program DL_MONTE. This image can be used to execute DL_MONTE simulations using DL_MONTE input files on their computer. This might be more appealing to a user than using a DL_MONTE binary, something which the user must typically compile from the source code themselves.",
+    "dcat:keyword": [
+      "A keyword",
+      "Another keyword"
+    ],
+    "dcat:themes": null,
+    "dcterms:publisher": [
+      {
+        "@id": "http://www.psdi.ac.uk",
+        "foaf:name": "Physical Sciences Data Infrastructure",
+        "@type": "foaf:Organisation",
+        "foaf:openid": "http://www.psdi.ac.uk"
+      }
+    ],
+    "dcat:landingPage": null,
+    "dcat:contactPoint": null,
+    "dcterms:creator": [
+      {
+        "@type": "foaf:Person",
+        "foaf:name": "Tom L. Underwood",
+        "foaf:openid": "https://orcid.org/0009-0002-4762-5852"
+      }
+    ],
+    "dcterms:language": null,
+    "dcterms:license": {
+      "@id": "https://opensource.org/license/bsd-3-clause"
+    },
+    "odrl:hasPolicy": null,
+    "adms:status": null,
+    "dcat:version": null,
+    "adms:versionNotes": null,
+    "dcterms:modified": null,
+    "dcterms:issued": null,
+    "dcat:downloadURL": {
+      "@id": "https://ghcr.io/psdi-uk/dlmonte-container/dlmonte-container:v0.0.1"
+    },
+    "dcatExt:repositoryURL": {
+      "@id": "https://github.com/PSDI-UK/dlmonte-container"
+    },
+    "dcatExt:programmingLanguage": [
+      "Programming Language :: Fortran"
+    ],
+    "dcatExt:deliveryFormat": "application/vnd.docker.distribution.manifest.v2+json",
+    "dcatExt:guidanceURL": null,
+    "dcatExt:developmentStatus": "Development Status :: 3 - Alpha",
+    "dcatExt:byteSize": null,
+    "dcatExt:conformsTo": null,
+    "dcatExt:exampleDataset": null,
+    "dcatExt:operatingSystem": [
+      "Operating System :: POSIX :: Linux",
+      "Operating System :: Unix",
+      "Operating System :: MacOS",
+      "Operating System :: Microsoft :: Windows"
+    ],
+    "dcatExt:checkSum": null
+  }
+]

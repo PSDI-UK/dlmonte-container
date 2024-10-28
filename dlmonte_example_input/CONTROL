@@ -1,0 +1,24 @@
+GCMC simulation of CO2 in zeolite
+use gaspressure
+use ortho
+finish
+
+temperature       273.0
+
+steps             100000
+
+revconformat xyz
+archiveformat xyz
+
+yamldata 1000
+
+move molecule 1 1
+co2
+move rotatemol 1 1
+co2
+
+move gcinsertmol 1 1 0.5
+co2 0.0001
+
+
+start
