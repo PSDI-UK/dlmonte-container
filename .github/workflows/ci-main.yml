@@ -18,19 +18,41 @@
 #   https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular.
 #
 
-name: tag-container-push
-run-name: tag-container-push
+name: ci-main
+run-name: ci-main
 
 
 on:
   workflow_dispatch:
   push:
-    branches:
-    - main
+#TU: Commented this out for testing so that pipeline will run on any branch
+#    branches:
+#    - main
   
 jobs:
+  vulnerability-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build the Container Image
+        run: docker build . --file Dockerfile --tag localbuild/testimage:latest
+      - name: Scan Image
+        uses: anchore/scan-action@v3
+        id: scan
+        with:
+          image: "localbuild/testimage:latest"
+          fail-build: true
+          output-format: sarif
+      - name: Upload Anchore Scan SARIF Report
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
   tag-container-push:
     runs-on: ubuntu-latest
+    needs: [vulnerability-scan]
     steps:
       - uses: actions/checkout@v4
         with:
