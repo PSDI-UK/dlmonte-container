@@ -56,9 +56,9 @@ jobs:
 #TU: This should be unnecessary, but it is here for debugging
       - name: Display SARIF file contents
         env:
-	  SARIF_FILE: "${{ steps.scan.outputs.sarif }}"
+          SARIF_FILE: "${{ steps.scan.outputs.sarif }}"
         run: |
-	  cat $SARIF_FILE
+          cat $SARIF_FILE
   tag-container-push:
     runs-on: ubuntu-latest
     needs: [vulnerability-scan]
