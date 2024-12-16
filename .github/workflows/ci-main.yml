@@ -53,6 +53,12 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
+#TU: This should be unnecessary, but it is here for debugging
+      - name: Display SARIF file contents
+        env:
+	  SARIF_FILE: ${{ steps.scan.outputs.sarif }}
+        run: |
+	  cat $SARIF_FILE
   tag-container-push:
     runs-on: ubuntu-latest
     needs: [vulnerability-scan]
