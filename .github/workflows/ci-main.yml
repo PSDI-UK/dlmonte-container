@@ -44,8 +44,8 @@ jobs:
         id: scan
         with:
           image: "localbuild/testimage:latest"
-#TU: Disable failure for now for testing purposes
-#          fail-build: true
+#TU: Disable failure for now for testing purposes; this is true by default
+          fail-build: false
           output-format: sarif
 #TU: Option for specifying threshold for causing build to fail
 #	  severity-cutoff: high
