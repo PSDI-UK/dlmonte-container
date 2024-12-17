@@ -1,27 +1,5 @@
-#
-# This action does the following upon a new commit to the 'main' branch:
-# 1) Creates a new release containing the repository source code, tagging the
-#    release with an appropriate version number, and publishing it on the Github project
-#    page
-# 2) Build a container image, tagging the release with an appropriate version number,
-#    and publishing it on the Github project page
-#
-# Notes:
-# - The version number is incremented every release as described in
-#   https://github.com/mathieudutour/github-tag-action. Note that by default semantic
-#   version numbers are used and the patch number is incremented every release.
-#   Moreover, in accordance with Angular conventional commits convention, the minor or
-#   major number is incremented only upon detection of commits in the history with
-#   certain formats. E.g. a commit beginning with 'feat:', signifying a new feature,
-#   would result in the minor number being incremented. For details on the expected
-#   format of commit messages in this regard see
-#   https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular.
-#
-
 name: ci-main
 run-name: ci-main
-
-
 on:
   workflow_dispatch:
   push:
@@ -30,73 +8,10 @@ on:
 #    - main
   
 jobs:
-  vulnerability-scan:
-    runs-on: ubuntu-latest
+  anchore-scan:
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Build the Container Image
-        run: docker build . --file Dockerfile --tag localbuild/testimage:latest
-      - name: Scan Image
-        uses: anchore/scan-action@v6
-        id: scan
-        with:
-          image: "localbuild/testimage:latest"
-#TU: Disable failure for now for testing purposes. fail-build is true by default
-          fail-build: false
-          output-format: sarif
-#TU: Option for specifying threshold for causing build to fail
-#	  severity-cutoff: high
-      - name: Upload Anchore Scan SARIF Report
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: ${{ steps.scan.outputs.sarif }}
-#TU: This should be unnecessary, but it is here for debugging
-      - name: Display SARIF file contents
-        env:
-          SARIF_FILE: "${{ steps.scan.outputs.sarif }}"
-        run: |
-          cat $SARIF_FILE
+      - uses: ./.github/workflows/anchore-scan.yml
   tag-container-push:
-    runs-on: ubuntu-latest
-    needs: [vulnerability-scan]
     steps:
-      - uses: actions/checkout@v4
-        with:
-          # Checkout the latest commit on the branch rather than not the commit which instigated the workflow. These are not the same if a bot has pushed a new commit to the branch during the workflow
-          ref: ${{ github.ref }}
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          release_branches: main
-      - name: Create a GitHub release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
-          body: ${{ steps.tag_version.outputs.changelog }}
-      - name: Setup docker auth
-        run: |
-          cat <<EOF > ~/.docker/config.json
-          {
-            "auths": {
-              "ghcr.io": {
-                "auth": "$(echo -n "$GIT_USERNAME:$GIT_PASSWORD" | base64 -w0)"
-              }
-            }
-          }
-          EOF
-        env: # needed to authenticate to github and download the repo
-          GIT_USERNAME: ${{ github.actor }}
-          GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-      - name: Docker build API
-        env:
-          IMAGE_NAME: "ghcr.io/psdi-uk/dlmonte-container/dlmonte:${{ steps.tag_version.outputs.new_tag }}"
-        run: |
-          docker build -t $IMAGE_NAME .
-          docker push $IMAGE_NAME
-
+      - uses: ./.github/workflows/tag-container-push.yml
+    needs: [anchore-scan]
