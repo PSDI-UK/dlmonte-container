@@ -15,7 +15,7 @@
 #   docker build -t dlmonte .
 #
 
-FROM python:3.8-slim-buster
+FROM debian:bookworm-slim
 
 WORKDIR /app
 
