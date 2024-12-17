@@ -15,24 +15,38 @@
 #   docker build -t dlmonte .
 #
 
-FROM debian:bookworm-slim
+#TU: FOR DEBIAN...
+#FROM debian:bookworm-slim
+#TU: FOR ALPINE...
+FROM alpine:latest
 
 WORKDIR /app
 
 # Install system dependencies
-RUN apt-get update
-RUN apt-get install -y \
-    gfortran \
+#TU: FOR DEBIAN...
+#RUN apt-get update
+#RUN apt-get install -y \
+#    gfortran \
+#    make \
+#    unzip \
+#    wget
+#TU: FOR ALPINE...
+RUN apk update
+RUN apk add \
     make \
+    gfortran \
     unzip \
     wget
-		
+
 # Install DLMONTE
 RUN wget -q https://gitlab.com/dl_monte/DL_MONTE-2/-/archive/master/DL_MONTE-2-master.zip
 RUN unzip DL_MONTE-2-master.zip
 RUN rm DL_MONTE-2-master.zip
 WORKDIR /app/DL_MONTE-2-master
-RUN bash build.sh SRL dir gfortran
+#TU: FOR DEBIAN...
+#RUN bash build.sh SRL dir gfortran
+#TU: FOR ALPINE...
+RUN sh build.sh SRL dir gfortran
 
 ENV PATH=/app/DL_MONTE-2-master/bin:$PATH
 
