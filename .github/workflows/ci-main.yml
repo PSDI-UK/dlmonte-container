@@ -9,9 +9,7 @@ on:
   
 jobs:
   anchore-scan:
-    steps:
-      - uses: ./.github/workflows/anchore-scan.yml
+    uses: ./.github/workflows/anchore-scan.yml
   tag-container-push:
-    steps:
-      - uses: ./.github/workflows/tag-container-push.yml
+    uses: ./.github/workflows/tag-container-push.yml
     needs: [anchore-scan]
