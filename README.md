@@ -38,12 +38,10 @@ executable the container will terminate.
 ## Security vulnerabilities
 
 The latest version of this container image uses [Apline Linux](https://hub.docker.com/_/alpine)
-as a base image. **Note that this base image, and the packages
-installed on it in order to compile DL_MONTE when creating the image,
-may have security vulnerabilities.** Use this image at your own risk.
-Details of the image and the aforementioned packages installed on
-Alpine Linux can be found in the `Dockerfile`.
-
+as a base image. **Note that the base image, and the packages
+installed onto it in order to compile DL_MONTE when creating the DL_MONTE
+container image, may have security vulnerabilities.** Hence use this image at your own risk.
+See the `Dockerfile` for more details regarding the contents of this image.
 
 ## Building the image
 
@@ -74,7 +72,7 @@ could be checked against the entire
 ### CI/CD pipeline
 Note that GitHub Actions is used to implement a CI/CD pipeline which, every
 commit:
-1. Builds the container image and scans it for **security vulberabilities**.
+1. Builds the container image and scans it for **security vulnerabilities**.
    Reports regarding vulnerabilities can be found
    [here](https://github.com/PSDI-UK/dlmonte-container/security/code-scanning).
 2. Builds the container image, gives it a version tag, and publishes it in

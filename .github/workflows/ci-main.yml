@@ -3,9 +3,8 @@ run-name: ci-main
 on:
   workflow_dispatch:
   push:
-#TU: Commented this out for testing so that pipeline will run on any branch
-#    branches:
-#    - main
+    branches:
+    - main
   
 jobs:
   anchore-scan:
