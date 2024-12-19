@@ -12,7 +12,8 @@ about the program.
 
 ## Obtaining an image
 
-Images can be found in  the 'Packages' section of this GitHub project.
+Images can be found in  the [Packages](https://github.com/PSDI-UK/dlmonte-container/pkgs/container/dlmonte-container%2Fdlmonte)
+section of this GitHub project.
 Commands are provided there to pull a specific version to your local
 instance of docker, e.g.
 ```
@@ -34,6 +35,16 @@ execute DL_MONTE in the current directory, and DL_MONTE output files
 will be created in the directory. Upon completion of the DL_MONTE
 executable the container will terminate.
 
+## Security vulnerabilities
+
+The latest version of this container image uses [Apline Linux](https://hub.docker.com/_/alpine)
+as a base image. **Note that this base image, and the packages
+installed on it in order to compile DL_MONTE when creating the image,
+may have security vulnerabilities.** Use this image at your own risk.
+Details of the image and the aforementioned packages installed on
+Alpine Linux can be found in the `Dockerfile`.
+
+
 ## Building the image
 
 To use the `Dockerfile` to build the image locally the command is:
@@ -45,18 +56,38 @@ is also assumed that the `Dockerfile` file is in the current
 directory.
 
 ## Notes for developers
-- Some example DL_MONTE input files are provided in the directory
-  `dlmonte_example_input`. (Note that DL_MONTE expects a minimum of
-  3 files: `CONTROL`,`CONFIG`, and `FIELD`. Such files are provided therein).
-  Invoking DL_MONTE using the container
-  image as described above in the same directory as these files
-  should result in the creation of a number of files ending in
-  `.000`. Moreover, the `OUTPUT.000` file, which contains a log
-  created by DL_MONTE during execution, should conclude with 'normal
-  exit'.
-- The file `psdi-tool-store-metadata.json` houses metadata for the
-  container image which is used by the
-  [PSDI Tool Store](https://psdi-uk.github.io/psdi-tool-store/). Ideally the
-  information in this file would be updated as part of a CI/CD pipeline,
-  but for now its contents are 'static'. **This is something to do
-  in the future.**
+
+### Testing the container image
+Some example DL_MONTE input files are provided in the directory
+`dlmonte_example_input`. (Note that DL_MONTE expects a minimum of
+3 files: `CONTROL`,`CONFIG`, and `FIELD`. Such files are provided therein).
+Invoking DL_MONTE using the container
+image as described above in the same directory as these files
+should result in the creation of a number of files ending in
+`.000`. Moreover, the `OUTPUT.000` file, which contains a log
+created by DL_MONTE during execution, should conclude with 'normal
+exit'. In the future, the CI/CD pipeline could incorporate checking that the
+container image behaves in this way. Better yet, the container image
+could be checked against the entire
+[DL_MONTE test suite](https://gitlab.com/dl_monte/dl_monte_tests).
+
+### CI/CD pipeline
+Note that GitHub Actions is used to implement a CI/CD pipeline which, every
+commit:
+1. Builds the container image and scans it for **security vulberabilities**.
+   Reports regarding vulnerabilities can be found
+   [here](https://github.com/PSDI-UK/dlmonte-container/security/code-scanning).
+2. Builds the container image, gives it a version tag, and publishes it in
+   the [Packages](https://github.com/PSDI-UK/dlmonte-container/pkgs/container/dlmonte-container%2Fdlmonte)
+   section of this project.
+3. Creates an archive containing the source code of this repository, gives
+   it a version tag, and publishes it in the [Releases](https://github.com/PSDI-UK/dlmonte-container/releases)
+   section.
+
+### Metadata for the PSDI Resource Catalogue
+The file `psdi-tool-store-metadata.json` houses metadata for the
+container image which is used by the
+[PSDI Tool Store](https://psdi-uk.github.io/psdi-tool-store/). Ideally the
+information in this file would be updated as part of a CI/CD pipeline,
+but for now its contents are 'static'. This is something to explore
+in the future.

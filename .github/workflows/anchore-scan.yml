@@ -1,5 +1,5 @@
-#TU: This file is a modified version of a workflow file provided by GitHub, namely
-#    the Security / Code scanning workflow 'Anchore Grype Vulnerability Scan'
+# This file is a modified version of a workflow file provided by GitHub, namely
+# the Security code-scanning workflow 'Anchore Grype Vulnerability Scan'.
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -37,7 +37,7 @@ jobs:
       id: scan
       with:
         image: "localbuild/testimage:latest"
-#TU: Set fail-build from true to false for now during testing
+        # Do *not* cause the CI pipeline to fail upon discovering a critical vulnerability
         fail-build: false
         severity-cutoff: critical
     - name: Upload vulnerability report
