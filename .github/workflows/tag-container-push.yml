@@ -1,5 +1,5 @@
 #
-# This action does the following upon a new commit to the 'main' branch:
+# This action does the following:
 # 1) Creates a new release containing the repository source code, tagging the
 #    release with an appropriate version number, and publishing it on the Github project
 #    page
@@ -23,10 +23,7 @@ run-name: tag-container-push
 
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-    - main
+  workflow_call:
   
 jobs:
   tag-container-push:
@@ -68,4 +65,3 @@ jobs:
         run: |
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
-

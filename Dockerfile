@@ -15,24 +15,24 @@
 #   docker build -t dlmonte .
 #
 
-FROM python:3.8-slim-buster
+FROM alpine:latest
 
 WORKDIR /app
 
 # Install system dependencies
-RUN apt-get update
-RUN apt-get install -y \
-    gfortran \
+RUN apk update
+RUN apk add \
     make \
+    gfortran \
     unzip \
     wget
-		
+
 # Install DLMONTE
 RUN wget -q https://gitlab.com/dl_monte/DL_MONTE-2/-/archive/master/DL_MONTE-2-master.zip
 RUN unzip DL_MONTE-2-master.zip
 RUN rm DL_MONTE-2-master.zip
 WORKDIR /app/DL_MONTE-2-master
-RUN bash build.sh SRL dir gfortran
+RUN sh build.sh SRL dir gfortran
 
 ENV PATH=/app/DL_MONTE-2-master/bin:$PATH
 

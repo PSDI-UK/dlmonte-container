@@ -1,0 +1,14 @@
+name: ci-main
+run-name: ci-main
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+  
+jobs:
+  anchore-scan:
+    uses: ./.github/workflows/anchore-scan.yml
+  tag-container-push:
+    uses: ./.github/workflows/tag-container-push.yml
+    needs: [anchore-scan]
