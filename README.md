@@ -82,6 +82,15 @@ commit:
    it a version tag, and publishes it in the [Releases](https://github.com/PSDI-UK/dlmonte-container/releases)
    section.
 
+It is important to keep this pipeline up to date with regards to upstream
+dependencies. For example, the pipeline uses a particular version of the
+`anchore/scan-action` Action (e.g. `anchore/scan-action@v6` means version 6).
+This should be updated if a new version of this Action is released. Note that
+certain Actions will print warnings if, e.g. certain features in the Actions
+which are used in this repo are to be deprecated; pay attention to such
+warnings.
+
+
 ### Metadata for the PSDI Resource Catalogue
 The file `psdi-tool-store-metadata.json` houses metadata for the
 container image which is used by the

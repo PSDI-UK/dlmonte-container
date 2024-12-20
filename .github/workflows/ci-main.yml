@@ -3,9 +3,8 @@ run-name: ci-main
 on:
   workflow_dispatch:
   push:
-#TU: Commented out for testing
-#    branches:
-#    - main
+    branches:
+    - main
   
 jobs:
   anchore-scan:
