@@ -64,7 +64,7 @@ image as described above in the same directory as these files
 should result in the creation of a number of files ending in
 `.000`. Moreover, the `OUTPUT.000` file, which contains a log
 created by DL_MONTE during execution, should conclude with 'normal
-exit'. As mentioned below the CI/CD pipeline incorporateing a job to ensure
+exit'. As mentioned below, the CI/CD pipeline incorporates a job to ensure
 that the container image behaves in this way. In the future it would be
 nice if the container image were checked against the entire
 [DL_MONTE test suite](https://gitlab.com/dl_monte/dl_monte_tests).
