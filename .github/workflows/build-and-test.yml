@@ -1,0 +1,32 @@
+# Builds the image and runs some tests to ensure it works as expected
+
+name: build-and-test
+run-name: build-and-test
+
+on:
+  workflow_call:
+  
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+      - name: Build the image
+        run: docker build . --file Dockerfile --tag localbuild/testimage:latest
+      # We test the image by running it as described in the README: running it while
+      # binding to a local directory containing DL_MONTE input files. The result should
+      # be that DL_MONTE output files are created in that directory. Here we use the
+      # directory in the repo which contains example DL_MONTE input files.
+      - name: Run DL_MONTE simulation with image using example input files
+        working-directory: dlmonte_example_input
+        run: docker run -v ${PWD}:/data localbuild/testimage:latest
+      # Upon sucessfully invoking a DL_MONTE simulation in a directory containing DL_MONTE
+      # input files, various output files should be created. This step checks that the
+      # main DL_MONTE output file, OUTPUT.000, has been created. If so, the image is
+      # behaving as expected. If not, something has gone wrong.
+      - name: Check for creation of DL_MONTE output files
+        working-directory: dlmonte_example_input
+        run: |
+          ls
+          [ -f OUTPUT.000 ]

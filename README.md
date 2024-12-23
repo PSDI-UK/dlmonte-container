@@ -64,21 +64,26 @@ image as described above in the same directory as these files
 should result in the creation of a number of files ending in
 `.000`. Moreover, the `OUTPUT.000` file, which contains a log
 created by DL_MONTE during execution, should conclude with 'normal
-exit'. In the future, the CI/CD pipeline could incorporate checking that the
-container image behaves in this way. Better yet, the container image
-could be checked against the entire
+exit'. As mentioned below, the CI/CD pipeline incorporates a job to ensure
+that the container image behaves in this way. In the future it would be
+nice if the container image were checked against the entire
 [DL_MONTE test suite](https://gitlab.com/dl_monte/dl_monte_tests).
 
 ### CI/CD pipeline
 Note that GitHub Actions is used to implement a CI/CD pipeline which, every
 commit:
-1. Builds the container image and scans it for **security vulnerabilities**.
+1. Builds the container image and performs light testing to ensure that it works.
+   The testing currently entails ensuring that the DL_MONTE output file `OUTPUT.000`
+   is generated if the image is used to invoke a DL_MONTE simulation,
+   as described above, using the example input DL_MONTE files in the
+   `dlmonte_example_input` directory. 
+2. Builds the container image and scans it for **security vulnerabilities**.
    Reports regarding vulnerabilities can be found
    [here](https://github.com/PSDI-UK/dlmonte-container/security/code-scanning).
-2. Builds the container image, gives it a version tag, and publishes it in
+3. Builds the container image, gives it a version tag, and publishes it in
    the [Packages](https://github.com/PSDI-UK/dlmonte-container/pkgs/container/dlmonte-container%2Fdlmonte)
    section of this project.
-3. Creates an archive containing the source code of this repository, gives
+4. Creates an archive containing the source code of this repository, gives
    it a version tag, and publishes it in the [Releases](https://github.com/PSDI-UK/dlmonte-container/releases)
    section.
 
