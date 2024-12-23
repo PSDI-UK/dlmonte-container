@@ -28,4 +28,4 @@ jobs:
       - name: Check for creation of DL_MONTE output files
         working-directory: dlmonte_example_input
         run: |
-	  [ -f OUTPUT.000 ]
+          [ -f OUTPUT.000 ]
