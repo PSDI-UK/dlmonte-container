@@ -25,8 +25,9 @@ RUN apk add \
     make \
     gfortran \
     unzip \
-    wget \
-    musl-dev
+    wget 
+##TU: Removed for testing purposes
+#  musl-dev
 
 # Install DLMONTE
 RUN wget -q https://gitlab.com/dl_monte/DL_MONTE-2/-/archive/master/DL_MONTE-2-master.zip
