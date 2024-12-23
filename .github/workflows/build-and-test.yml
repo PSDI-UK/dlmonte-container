@@ -27,4 +27,5 @@ jobs:
       # behaving as expected. If not, something has gone wrong.
       - name: Check for creation of DL_MONTE output files
         working-directory: dlmonte_example_input
-        run: [ -f OUTPUT.000 ]
+        run: |
+	  [ -f OUTPUT.000 ]
