@@ -1,7 +1,7 @@
 [
   {
     "@id": null,
-    "@type": "dcatExt:Tool",
+    "@type": "psdiDcatExt:Tool",
     "dcat:resource": {
       "@id": null
     },
@@ -43,24 +43,24 @@
     "dcat:downloadURL": {
       "@id": "https://ghcr.io/psdi-uk/dlmonte-container/dlmonte:v0.0.1"
     },
-    "dcatExt:repositoryURL": {
+    "psdiDcatExt:repositoryURL": {
       "@id": "https://github.com/PSDI-UK/dlmonte-container"
     },
-    "dcatExt:programmingLanguage": [
+    "psdiDcatExt:programmingLanguage": [
       "Programming Language :: Fortran"
     ],
-    "dcatExt:deliveryFormat": "application/vnd.docker.distribution.manifest.v2+json",
-    "dcatExt:guidanceURL": null,
-    "dcatExt:developmentStatus": "Development Status :: 3 - Alpha",
-    "dcatExt:byteSize": null,
-    "dcatExt:conformsTo": null,
-    "dcatExt:exampleDataset": null,
-    "dcatExt:operatingSystem": [
+    "psdiDcatExt:deliveryFormat": "application/vnd.docker.distribution.manifest.v2+json",
+    "psdiDcatExt:guidanceURL": null,
+    "psdiDcatExt:developmentStatus": "Development Status :: 3 - Alpha",
+    "psdiDcatExt:byteSize": null,
+    "psdiDcatExt:conformsTo": null,
+    "psdiDcatExt:exampleDataset": null,
+    "psdiDcatExt:operatingSystem": [
       "Operating System :: POSIX :: Linux",
       "Operating System :: Unix",
       "Operating System :: MacOS",
       "Operating System :: Microsoft :: Windows"
     ],
-    "dcatExt:checkSum": null
+    "psdiDcatExt:checkSum": null
   }
 ]
