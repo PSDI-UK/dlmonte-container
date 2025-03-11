@@ -3,7 +3,7 @@ run-name: ci-main
 on:
   workflow_dispatch:
   push:
-  
+
 jobs:
   # Run this on all branches
   build-and-test:
@@ -15,6 +15,9 @@ jobs:
     if: github.ref == 'refs/heads/main'
   # Run this only on main branch
   tag-container-push:
+    # NOTE: The dependency on 'anchore-scan' has been disabled for now; see
+    #       the above comment regarding 'anchore-scan' for further info.
+    #needs: [anchore-scan]
     uses: ./.github/workflows/tag-container-push.yml
     needs: [anchore-scan]
     if: github.ref == 'refs/heads/main'
