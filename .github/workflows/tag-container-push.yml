@@ -66,12 +66,13 @@ jobs:
         env:
           # Note that this is the name of the image *without the tag*
           IMAGE_NAME: "ghcr.io/psdi-uk/dlmonte-container/dlmonte"
+	  TAG: ${{ steps.tag_version.outputs.new_tag }}
         run: |
           # Build and push image with conventional version tag
-          docker build -t ${IMAGE_NAME}:${{ steps.tag_version.outputs.new_tag }} .
-          docker push $IMAGE_NAME:${{ steps.tag_version.outputs.new_tag }}
-          if [[ "${{ steps.tag_version.outputs.new_tag }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Detected ${{ steps.tag_version.outputs.new_tag }} corresponds to a release version. Assigning image 'latest' tag"
-            docker tag ${IMAGE_NAME}:${{ steps.tag_version.outputs.new_tag }} ${IMAGE_NAME}:latest
-            docker push ${IMAGE_NAME}:latest
+          docker build -t $IMAGE_NAME:$TAG .
+          docker push $IMAGE_NAME:$TAG
+          if [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Detected $TAG corresponds to a release version. Assigning image 'latest' tag"
+            docker tag $IMAGE_NAME:$TAG $IMAGE_NAME:latest
+            docker push $IMAGE_NAME:latest
 	  fi
