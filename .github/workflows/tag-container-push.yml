@@ -72,6 +72,6 @@ jobs:
           docker push $IMAGE_NAME:${{ steps.tag_version.outputs.new_tag }}
           if [[ "${{ steps.tag_version.outputs.new_tag }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Detected ${{ steps.tag_version.outputs.new_tag }} corresponds to a release version. Assigning image 'latest' tag"
-            docker tag ${IMAGE_NAME}: ${IMAGE_NAME}:latest
+            docker tag ${IMAGE_NAME}:${{ steps.tag_version.outputs.new_tag }} ${IMAGE_NAME}:latest
             docker push ${IMAGE_NAME}:latest
 	  fi
