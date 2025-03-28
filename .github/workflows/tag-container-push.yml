@@ -64,7 +64,7 @@ jobs:
           GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Docker image with version tags
         env:
-	  # Note that this is the name of the image *without the tag*
+          # Note that this is the name of the image *without the tag*
           IMAGE_NAME: "ghcr.io/psdi-uk/dlmonte-container/dlmonte"
         run: |
           # Build and push image with conventional version tag
