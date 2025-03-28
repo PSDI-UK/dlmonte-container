@@ -71,9 +71,9 @@ jobs:
           # Build and push image with conventional version tag
           docker build -t $IMAGE_NAME:$TAG .
           docker push $IMAGE_NAME:$TAG
-#TODO:  Enable this and indent by 2 within if block after testing
-#          if [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          #TODO:  Enable this and restore indent in if block after testing
+          #          if [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
           echo "Detected $TAG corresponds to a release version. Assigning image 'latest' tag"
           docker tag $IMAGE_NAME:$TAG $IMAGE_NAME:latest
           docker push $IMAGE_NAME:latest
-#          fi
+          #          fi
