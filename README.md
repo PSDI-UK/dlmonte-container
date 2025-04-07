@@ -62,10 +62,10 @@ described in the `LICENSE` file in this repository. However, while some of this
 code describes container images or processes to build container images,
 the software license applicable to these container images will in general not be the
 same as `LICENSE`. This is because a container image typically includes binaries
-and source code from many pieces of software; hence the software license for a
+and source code from many pieces of software; the software license for a
 container image depends on the licenses of its constitutent software.
-Before using any container images linked to this repository, you must therefore
-ensure that you adhere to the licensing conditions of its constituent software.
+This should be kept in mind when using any container image linked to this
+repository, or any container image built using code in this repository.
 
 
 ## Notes for developers
