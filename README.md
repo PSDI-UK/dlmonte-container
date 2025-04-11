@@ -113,10 +113,9 @@ warnings.
 
 ### Metadata for the PSDI Resource Catalogue
 The file `psdi-tool-store-metadata.json` houses metadata for the
-container image which is used by the
+container image which is used by the prototype
 [PSDI Tool Store](https://psdi-uk.github.io/psdi-tool-store/). Ideally the
 information in this file would be updated as part of a CI/CD pipeline,
-but for now its contents are 'static'. This is something to explore
-in the future.
+but for now its contents are 'static'. This is something that may be explored.
 
 
