@@ -35,6 +35,7 @@ execute DL_MONTE in the current directory, and DL_MONTE output files
 will be created in the directory. Upon completion of the DL_MONTE
 executable the container will terminate.
 
+
 ## Security vulnerabilities
 
 The latest version of this container image uses [Apline Linux](https://hub.docker.com/_/alpine)
@@ -52,6 +53,20 @@ docker build -t dlmonte .
 where it is assumed that the image is to be named `dlmonte` and it
 is also assumed that the `Dockerfile` file is in the current
 directory.
+
+
+## License
+
+The code in this repository is provided under the conditions
+described in the `LICENSE` file in this repository. However, while some of this
+code describes container images or processes to build container images,
+the software license applicable to these container images will in general not be the
+same as `LICENSE`. This is because a container image typically includes binaries
+and source code from many pieces of software; the software license for a
+container image depends on the licenses of its constituent software.
+This should be kept in mind when using any container image linked to this
+repository, or any container image built using code in this repository.
+
 
 ## Notes for developers
 
@@ -98,8 +113,9 @@ warnings.
 
 ### Metadata for the PSDI Resource Catalogue
 The file `psdi-tool-store-metadata.json` houses metadata for the
-container image which is used by the
+container image which is used by the prototype
 [PSDI Tool Store](https://psdi-uk.github.io/psdi-tool-store/). Ideally the
 information in this file would be updated as part of a CI/CD pipeline,
-but for now its contents are 'static'. This is something to explore
-in the future.
+but for now its contents are 'static'. This is something that may be explored.
+
+
